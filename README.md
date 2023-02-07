@@ -1,4 +1,4 @@
-# Cookie Monster
+# CookieZ
 
 ## Usage 🗿
 Navigate to the directory that contains this repo then open terminal/cmd in it and type:
